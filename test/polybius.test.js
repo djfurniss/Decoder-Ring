@@ -2,12 +2,6 @@ const {expect} = require("chai");
 const {polybius} = require("../src/polybius");
 
 describe("My Polybius Tests", ()=>{
-    describe("Encoding", ()=>{
-        it("returns false if the input is not a string", ()=>{
-            const input = 2399
-            const actual = polybius(input)
-        expect(actual).to.be.false;
-        });
         
         it("ignores capital letters", ()=>{
             const input = 'ABD'
