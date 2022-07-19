@@ -35,45 +35,4 @@ const substitutionModule = (function () {
   };
 })();
 
-
-//------extra funcitonality testing--------
-// const checkUniqueness = (alph)=>{
-//   lettersArr= alph.split("")
-//   const result = lettersArr.reduce((acc, letter)=>{
-//     if(acc.includes(letter)) return false
-//     acc += letter
-//     return acc
-//   }, "")
-//   return result ? true: false
-// }
-
-// const alphabet = "xoyqmcgrukswaflnthdjpzibev"
-//   function substitution(input, alphabet, encode = true) {
-//     input = input.toLowerCase();
-//     // if(!checkUniqueness(alphabet)) return false; 
-//     let result = ""
-//     let words = input.split(" ")
-//     // console.log(words)
-//     words.forEach(word=>{
-//       console.log(word)
-//       for (let i = 0; i < word.length; i++){
-//         if(encode)result += alphabet[word[i].charCodeAt()-97]
-//         if(!encode) result += String.fromCharCode(alphabet.indexOf(word[i])+97)
-//       }
-//       result += " "
-//     })
-//     console.log(result.trim())
-//     return result.trim()
-//   }
-
-// substitution('abd efg', alphabet)
-// substitution('xoq mcg', alphabet, false)
-// console.log(checkUniqueness(alphabet))
-// substitution('ufnpj xfq lpjnpj', alphabet, false)
-
-// input.charCodeAt(i)
-
-// console.log(String.fromCharCode(97))
-
-
 module.exports = { substitution: substitutionModule.substitution };
