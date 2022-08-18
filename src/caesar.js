@@ -7,7 +7,7 @@ const caesarModule = (function () {
   // you can add any code you want within this function scope
 
   function caesar(input, shift, encode = true) {
-        if(!input ||!shift ||shift>25|| shift< -25) return false
+        if(!input || !shift ||shift>25|| shift< -25) return false
     let result = ''
     input = input.toLowerCase()
       encode == false ? shift = shift*-1 : shift = shift;
