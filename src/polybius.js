@@ -4,8 +4,9 @@
 // of the anonymous function on line 6
 
 const polybiusModule = (function () {
-  // you can add any code you want within this function scope
-  const alphGrid = [
+    //this grid mimics the rows and columns of the polybius square 
+    //each array represents a column; each array's indexes represent the rows and are referenced respectively (adding 1 to each since indicies start at 0)
+  const alphGrid = [ 
     ['a', 'f', 'l', 'q', 'v'],
     ['b', 'g', 'm', 'r', 'w'],
     ['c', 'h', 'n', 's', 'x'],
@@ -14,90 +15,40 @@ const polybiusModule = (function () {
   ]
 
   function polybius(input, encode = true) {
-    let result = ''
-  //---ENCODING---
-    if(encode && typeof input === 'string'){
-        input = input.toLowerCase()
-        for(let i = 0; i < input.length; i++){
-          if(input.charCodeAt(i)<97||input.charCodeAt(i)>122) result += input[i];
-          if(input[i] === 'i' || input[i] === 'j') result += 42 ;
-            for(let j = 0; j <alphGrid.length; j++){
-              if(alphGrid[j].includes(input[i])){
-                result += `${j+1}${alphGrid[j].indexOf(input[i])+1}`
+    let result = '' //placeholder to return
+    //---encoding---
+      if(encode && typeof input === 'string'){
+      input = input.toLowerCase() //turns all input lowercase
+        
+        for(let i = 0; i < input.length; i++){ //loops through the input string to access each character
+          if(input.charCodeAt(i)<97||input.charCodeAt(i)>122) result += input[i]; //catches all characters that aren't an alphabet to leave them in tact
+          if(input[i] === 'i' || input[i] === 'j') result += 42 ; //guard clause for letters 'i' and 'j' 
+            for(let j = 0; j <alphGrid.length; j++){ //inner loop to reference the polybius square grid 
+              if(alphGrid[j].includes(input[i])){ //finds which array has the current character
+                result += `${j+1}${alphGrid[j].indexOf(input[i])+1}` //concats template literals of the indexed location of the letter (adding 1 to each)
               }
             }
           }
-      // console.log(result)
       return result.trim()
       }
-    //---DECODING---
+    //---decoding---
       if(!encode){
-        if(typeof input == "number") input = input.toString()
-        const decodeNum = input.split(" ")
-            if (decodeNum.join("").length%2==1)return false; 
-          decodeNum.forEach((num)=>{
-            for (let i = 0; i < num.length; i+=2){
-              // console.log(num[i], num[i+1])
-              result += alphGrid[num[i]-1][num[i+1]-1]
+        if(typeof input == "number") input = input.toString() //makes sure it's always dealing with a string
+        const decodeNum = input.split(" ") //splits each set of numbers into an array
+        if(decodeNum.join("").length%2==1)return false; //makes sure the total length of numbers excluding spaces is even
+          decodeNum.forEach((num)=>{ //excecutes on each set of numbers
+            for (let i = 0; i < num.length; i+=2){ //increments by two for each pair of numbers to be set to one character
+              result += alphGrid[num[i]-1][num[i+1]-1] //references to the indecies of the polybius square grid (-1) to assign the character
             }
-            result += ` `
+            result += ` ` //keeps the spaces in between each word
           })
-      // console.log(result)
       return result.trim()
       }
-    return false; 
   }
 
   return {
     polybius,
   };
 })();
-
-//----extra functionality testing------
-//     const alphGrid = [
-//       ['a', 'f', 'l', 'q', 'v'],
-//       ['b', 'g', 'm', 'r', 'w'],
-//       ['c', 'h', 'n', 's', 'x'],
-//       ['d', 'i/j', 'o', 't', 'y'],
-//       ['e', 'k', 'p', 'u', 'z']
-//     ]
-
-// function polybius(input, encode = true) {
-//   input = input.toLowerCase()
-//   let result = ''
-//     if(encode && typeof input == 'string'){
-//       for(let i = 0; i < input.length; i++){
-//         if(input.charCodeAt(i)<97||input.charCodeAt(i)>122) result += input[i] ;
-//         if(input[i] === 'i' || input[i] === 'j') result += 42 ;
-//           for(let j = 0; j <alphGrid.length; j++){
-//             if(alphGrid[j].includes(input[i])){
-//               result += `${j+1}${alphGrid[j].indexOf(input[i])+1}`
-//             }
-//           }
-//         }
-//     console.log(result)
-//     }
-
-//   //----DECODING----
-//     if(!encode){
-//       const decodeNum = input.split(" ")
-//       if (decodeNum.join("").length%2==1)return false; 
-//         decodeNum.forEach((num)=>{
-//           for (let i = 0; i < num.length; i+=2){
-//             // console.log(num[i], num[i+1])
-//             result += alphGrid[num[i]-1][num[i+1]-1]
-//           }
-//           result += ` `
-//         })
-//     console.log(result)
-//     }
-// }
-
-// let test = alphGrid.filter((row) => row.includes('e'))
-// let secondNum=test.map(row=> row.indexOf('k')+1)
-// console.log(test)
-// console.log(secondNum)
-// polybius("secret message&^@")
-// polybius("345131245144 23513434112251", false)
 
 module.exports = { polybius: polybiusModule.polybius };
