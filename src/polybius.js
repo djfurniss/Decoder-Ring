@@ -1,8 +1,3 @@
-// Please refrain from tampering with the setup code provided here,
-// as the index.html and test files rely on this setup to work properly.
-// Only add code (helper methods, variables, etc.) within the scope
-// of the anonymous function on line 6
-
 const polybiusModule = (function () {
     //this grid mimics the rows and columns of the polybius square 
     //each array represents a column; each array's indexes represent the rows and are referenced respectively (adding 1 to each since indicies start at 0)
