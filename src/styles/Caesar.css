@@ -1,0 +1,14 @@
+#Caesar{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    width: 300px;
+}
+#Caesar .row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
